@@ -26,6 +26,9 @@ gem 'clearance'
 gem 'semantic-ui-sass'
 gem 'jquery-rails'
 gem 'administrate'
+gem 'administrate-field-paperclip'
+gem "paperclip", "~> 5.2.1"
+gem 'aws-sdk', '~> 2.3'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

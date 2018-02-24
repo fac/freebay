@@ -16,6 +16,7 @@ class ListingDashboard < Administrate::BaseDashboard
     started_on: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    image: Field::Paperclip,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -28,6 +29,7 @@ class ListingDashboard < Administrate::BaseDashboard
     :title,
     :description,
     :duration,
+    :image,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,6 +43,7 @@ class ListingDashboard < Administrate::BaseDashboard
     :started_on,
     :created_at,
     :updated_at,
+    :image,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -52,6 +55,7 @@ class ListingDashboard < Administrate::BaseDashboard
     :duration,
     :reserve_price,
     :started_on,
+    :image,
   ].freeze
 
   # Overwrite this method to customize how listings are displayed

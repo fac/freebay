@@ -2,10 +2,10 @@
   <% @listings.each do |listing| %>
   <div class="card">
     <div class="image">
-      <img src="/images/avatar2/large/matthew.png">
+      <%= image_tag listing.image.url(:medium) %>
     </div>
     <div class="content">
-      <div class="header">title</div>
+      <div class="header"><%= listing.title %></div>
       <div class="description">
         <%= listing.description %>
       </div>
