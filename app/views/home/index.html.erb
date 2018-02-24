@@ -1,3 +1,13 @@
 <h1 class="ui header">
   Auctions
 </h1>
+
+<% if @auctions.empty? %>
+  <p>No auctions!</p>
+<% else %>
+  <div class="ui list">
+  <% @auctions.each do |auction| %>
+    <div class="item"><%= @auction.item.description %></div>
+  <% end %>
+  </div>
+<% end %>

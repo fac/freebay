@@ -18,6 +18,7 @@ module Freebay
 
     config.to_prepare do
       Clearance::SessionsController.layout "sessions"
+      Clearance::UsersController.layout "sessions"
     end
   end
 end
