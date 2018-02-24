@@ -2,23 +2,49 @@
 <html>
 <head>
   <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div id="header">
-    <% if signed_in? -%>
-      <%= button_to t(".sign_out"), sign_out_path, method: :delete %>
-    <% else -%>
-      <%= link_to t(".sign_in"), sign_in_path %>
-    <% end -%>
+  <div class="ui fixed inverted menu">
+    <div class="ui container">
+      <div class="header item">
+        💰FreeBay
+      </div>
+      <div class="right menu">
+        <% if signed_in? %>
+          <div class="item">
+            <%= current_user.email %>
+          </div>
+          <div class="item">
+            <%= link_to "Sign out", sign_out_path, method: :delete %>
+          </div>
+        <% else %>
+          <%= link_to "Sign in", sign_in_path %>
+        <% end %>
+      </div>
+    </div>
   </div>
 
-  <div id="flash">
-    <% flash.each do |key, value| -%>
-      <div id="flash_<%= key %>"><%=h value %></div>
+  <div class="ui main text container">
+    <% if flash[:error] %>
+    <div id="flash" class="ui negative message">
+      <i class="close icon"></i>
+      <% flash.each do |key, value| -%>
+        <div id="flash_<%= key %>"><%=h value %></div>
+      <% end %>
+    </div>
     <% end %>
+
+    <%= yield %>
   </div>
 
-  <%= yield %>
+  <div class="ui inverted vertical footer segment">
+    <div class="ui center aligned container">
+      <p>Built with 💚 at FreeAgent</p>
+      <p>Hack Days Feb 2018</p>
+    </div>
+  </div>
 </body>
 </html>

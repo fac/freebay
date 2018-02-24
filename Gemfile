@@ -23,6 +23,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'postgresql'
 gem 'clearance'
+gem 'semantic-ui-sass'
+gem 'jquery-rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'

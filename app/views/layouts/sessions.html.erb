@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <div class="ui container">
+    <div class="ui middle aligned center aligned grid">
+      <div class="column left aligned">
+
+        <% unless flash.empty? %>
+          <div id="flash" class="ui negative message">
+            <i class="close icon"></i>
+
+            <% flash.each do |key, value| -%>
+              <div id="flash_<%= key %>"><%=h value %></div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
