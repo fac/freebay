@@ -5,9 +5,5 @@
 <% if @listings.empty? %>
   <p>No auctions!</p>
 <% else %>
-  <div class="ui list">
-  <% @listings.each do |auction| %>
-    <div class="item"><%= @listing.description %></div>
-  <% end %>
-  </div>
+  <%= render 'listings' %>
 <% end %>

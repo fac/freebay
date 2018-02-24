@@ -9,9 +9,11 @@ class ListingDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    description: Field::String,
+    title: Field::String,
+    description: Field::Text,
     duration: Field::Number,
     reserve_price: Field::String.with_options(searchable: false),
+    started_on: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,18 +25,20 @@ class ListingDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = [
     :id,
+    :title,
     :description,
     :duration,
-    :reserve_price,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = [
     :id,
+    :title,
     :description,
     :duration,
     :reserve_price,
+    :started_on,
     :created_at,
     :updated_at,
   ].freeze
@@ -43,9 +47,11 @@ class ListingDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :title,
     :description,
     :duration,
     :reserve_price,
+    :started_on,
   ].freeze
 
   # Overwrite this method to customize how listings are displayed

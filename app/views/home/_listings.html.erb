@@ -1,0 +1,24 @@
+<div class="ui link cards">
+  <% @listings.each do |listing| %>
+  <div class="card">
+    <div class="image">
+      <img src="/images/avatar2/large/matthew.png">
+    </div>
+    <div class="content">
+      <div class="header">title</div>
+      <div class="description">
+        <%= listing.description %>
+      </div>
+    </div>
+    <div class="extra content">
+      <span class="right floated">
+        Ends at ...
+      </span>
+      <span>
+        <i class="hand paper outline icon"></i>
+        x Bids
+      </span>
+    </div>
+  </div>
+  <% end %>
+</div>

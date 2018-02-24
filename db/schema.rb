@@ -16,9 +16,11 @@ ActiveRecord::Schema.define(version: 2018_02_24_150421) do
   enable_extension "plpgsql"
 
   create_table "listings", force: :cascade do |t|
-    t.string "description", null: false
+    t.string "title", null: false
+    t.text "description", null: false
     t.integer "duration", null: false
     t.decimal "reserve_price"
+    t.datetime "started_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
