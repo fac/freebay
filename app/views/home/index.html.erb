@@ -2,12 +2,12 @@
   Auctions
 </h1>
 
-<% if @auctions.empty? %>
+<% if @listings.empty? %>
   <p>No auctions!</p>
 <% else %>
   <div class="ui list">
-  <% @auctions.each do |auction| %>
-    <div class="item"><%= @auction.item.description %></div>
+  <% @listings.each do |auction| %>
+    <div class="item"><%= @listing.description %></div>
   <% end %>
   </div>
 <% end %>
