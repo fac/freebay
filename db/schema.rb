@@ -10,23 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_24_202136) do
+ActiveRecord::Schema.define(version: 2018_02_24_234010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "bids", force: :cascade do |t|
+    t.integer "listing_id", null: false
+    t.integer "user_id", null: false
+    t.decimal "amount", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "listings", force: :cascade do |t|
     t.string "title", null: false
     t.text "description", null: false
-    t.integer "duration", null: false
     t.decimal "reserve_price"
-    t.datetime "started_on"
+    t.datetime "start_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_file_name"
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
+    t.datetime "end_time"
+    t.decimal "starting_price", default: "0.0", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,4 +49,6 @@ ActiveRecord::Schema.define(version: 2018_02_24_202136) do
     t.index ["remember_token"], name: "index_users_on_remember_token"
   end
 
+  add_foreign_key "bids", "listings"
+  add_foreign_key "bids", "users"
 end

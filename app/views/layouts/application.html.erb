@@ -7,8 +7,8 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div class="ui fixed inverted menu">
-    <div class="ui container">
+  <div class="ui main text container">
+    <div class="ui fixed inverted menu">
       <div class="header item">
         💰FreeBay
       </div>
@@ -25,16 +25,12 @@
         <% end %>
       </div>
     </div>
-  </div>
 
-  <div class="ui main text container">
-    <% if flash[:error] %>
-    <div id="flash" class="ui negative message">
-      <i class="close icon"></i>
-      <% flash.each do |key, value| -%>
-        <div id="flash_<%= key %>"><%=h value %></div>
-      <% end %>
-    </div>
+    <% flash.each do |key, value| %>
+      <div class="<%= flash_class(key) %> closable">
+        <i class="close icon"></i>
+        <%= value %>
+      </div>
     <% end %>
 
     <%= yield %>

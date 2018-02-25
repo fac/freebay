@@ -11,11 +11,16 @@ class ListingDashboard < Administrate::BaseDashboard
     id: Field::Number,
     title: Field::String,
     description: Field::Text,
-    duration: Field::Number,
     reserve_price: Field::String.with_options(searchable: false),
-    started_on: Field::DateTime,
+    starting_price: Field::String.with_options(searchable: false),
+    start_time: Field::DateTime,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    image_file_name: Field::String,
+    image_content_type: Field::String,
+    image_file_size: Field::Number,
+    image_updated_at: Field::DateTime,
+    end_time: Field::DateTime,
     image: Field::Paperclip,
   }.freeze
 
@@ -28,7 +33,6 @@ class ListingDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :description,
-    :duration,
     :image,
   ].freeze
 
@@ -38,11 +42,12 @@ class ListingDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :description,
-    :duration,
     :reserve_price,
-    :started_on,
+    :starting_price,
+    :start_time,
     :created_at,
     :updated_at,
+    :end_time,
     :image,
   ].freeze
 
@@ -52,9 +57,10 @@ class ListingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :title,
     :description,
-    :duration,
     :reserve_price,
-    :started_on,
+    :starting_price,
+    :start_time,
+    :end_time,
     :image,
   ].freeze
 

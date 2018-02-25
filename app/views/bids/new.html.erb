@@ -1,0 +1,21 @@
+<h2 class="ui header">New Bid</h2>
+
+<p>
+  You're about to bid on <strong><%= @listing.title %></strong>.
+</p>
+<p>
+  <% if @listing.bids.present? %>
+    The current winning bid is <%= number_to_currency @listing.winning_bid, unit: "£" %>.
+  <% else %>
+    You're the first bidder – don't hold back!
+  <% end %>
+</p>
+
+<%= form_for [@listing, @bid], html: { class: "ui form" } do |form| %>
+  <div class="inline field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount %>
+  </div>
+
+  <%= form.submit "Place bid", class: "ui primary button"  %>
+<% end %>

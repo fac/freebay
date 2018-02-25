@@ -1,24 +1,32 @@
 <div class="ui link cards">
   <% @listings.each do |listing| %>
-  <div class="card">
-    <div class="image">
-      <%= image_tag listing.image.url(:medium) %>
-    </div>
-    <div class="content">
-      <div class="header"><%= listing.title %></div>
-      <div class="description">
-        <%= listing.description %>
+    <%= link_to new_listing_bid_path(listing), class: "ui card" do %>
+      <div class="image">
+        <%= image_tag listing.image.url(:medium) %>
       </div>
-    </div>
-    <div class="extra content">
-      <span class="right floated">
-        Ends at ...
-      </span>
-      <span>
-        <i class="hand paper outline icon"></i>
-        x Bids
-      </span>
-    </div>
-  </div>
+      <div class="content">
+        <div class="header"><%= listing.title %></div>
+        <div class="description">
+          <%= listing.description %>
+        </div>
+      </div>
+      <div class="extra content">
+        <span class="right floated">
+          <% if listing.end_time.present? %>
+            <% if listing.end_time > Time.now %>
+              Ends in <%= distance_of_time_in_words(Time.now, listing.end_time) %>
+            <% else %>
+              Ended
+            <% end %>
+          <% else %>
+            Not Active
+          <% end %>
+        </span>
+        <span>
+          <i class="hand paper outline icon"></i>
+          <%= pluralize listing.bids.count, 'Bid' %>
+        </span>
+      </div>
+    <% end %>
   <% end %>
 </div>
