@@ -1,6 +1,7 @@
 <h1 class="ui header"><%= @listing.title %></h1>
 
-<p>
+<% if @listing.active? %>
+  <p>
   <% if @listing.bids.present? %>
     <%= pluralize @listing.bids.count, "bid" %> on this item.
     The current price is
@@ -8,11 +9,18 @@
   <% else %>
     No bids yet. Feeling lucky?
   <% end %>
-</p>
+  </p>
 
-<p>
-  <%= link_to "Bid now", new_listing_bid_path(@listing), class: "ui primary button" %>
-</p>
+  <p>
+    <%= link_to "Bid now", new_listing_bid_path(@listing), class: "ui primary button" %>
+  </p>
+
+<% else %>
+  <p>
+    Awww, this listing hasn't started, so you can't make a bid yet 🐼
+  </p>
+<% end %>
+
 
 <div class="ui grid listing">
   <div class="eight wide column">
