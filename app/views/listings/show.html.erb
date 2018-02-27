@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<% if current_user.admin? && @listing.bids.order(:created_at).count %>
+<% if current_user.admin? && @listing.bids.order("created_at DESC").count %>
 <h2 class="ui header"> Bid History</h2>
 <table class="ui celled table">
   <thead>
