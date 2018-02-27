@@ -40,7 +40,7 @@
   </div>
 </div>
 
-<% if current_user.admin? && @listing.bids.order("created_at DESC").count %>
+<% if current_user.admin? && @listing.bids.count %>
 <h2 class="ui header"> Bid History</h2>
 <table class="ui celled table">
   <thead>
@@ -50,7 +50,7 @@
     <th>Bid</th>
   </tr></thead>
   <tbody>
-    <% @listing.bids.each do |bid| %>
+    <% @listing.bids.order("created_at DESC").each do |bid| %>
     <tr>
       <td><%= bid.created_at.to_s :short %></td>
       <td><%= bid.user.name %></td>
