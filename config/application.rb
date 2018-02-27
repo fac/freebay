@@ -24,4 +24,3 @@ module Freebay
 end
 
 require 'semantic-ui-sass'
-require 'session'
