@@ -1,6 +1,6 @@
 <div class="ui link cards">
   <% @listings.each do |listing| %>
-    <%= link_to new_listing_bid_path(listing), class: "ui card" do %>
+    <%= link_to listing_path(listing), class: "ui card" do %>
       <div class="image">
         <%= image_tag listing.image.url(:medium) %>
       </div>
