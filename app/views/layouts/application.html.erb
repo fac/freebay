@@ -7,10 +7,10 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div class="ui fixed inverted menu">
+  <div class="ui fixed menu">
     <div class="ui container">
       <div class="header item">
-        💰FreeBay
+        <%= image_tag "freeBay-logo.svg", class: "logo" %>
       </div>
       <div class="right menu">
         <% if signed_in? %>
@@ -38,7 +38,7 @@
     <%= yield %>
   </div>
 
-  <div class="ui inverted vertical footer segment">
+  <div class="ui vertical footer segment">
     <div class="ui center aligned container">
       <p>Built with 💚 at FreeAgent</p>
       <p>Hack Days Feb 2018</p>
