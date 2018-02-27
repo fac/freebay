@@ -15,11 +15,18 @@
  */
 @import "semantic-ui";
 
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 .ui.menu .item img.logo {
   margin-right: 1.5em;
 }
 .main.container {
   margin-top: 7em;
+  flex: 1;
 }
 .wireframe {
   margin-top: 2em;
@@ -27,6 +34,11 @@
 .ui.footer.segment {
   margin: 5em 0em 0em;
   padding: 5em 0em;
-  background-color: #064974;
+  background-color: #00314c;
   color: #FFF;
+}
+
+.ui.menu .item > img.logo {
+  width: auto !important;
+  max-width: 100px;
 }
