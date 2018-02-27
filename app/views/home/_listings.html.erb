@@ -1,6 +1,6 @@
 <div class="ui link cards">
   <% @listings.each do |listing| %>
-    <%= link_to new_listing_bid_path(listing), class: "ui card" do %>
+    <%= link_to listing_path(listing), class: "ui card" do %>
       <div class="image">
         <%= image_tag listing.image.url(:medium) %>
       </div>
@@ -12,7 +12,7 @@
       </div>
       <div class="extra content">
         <span class="right floated">
-          <% if listing.end_time.present? %>
+          <% if listing.active? %>
             <% if listing.end_time > Time.now %>
               Ends in <%= distance_of_time_in_words(Time.now, listing.end_time) %>
             <% else %>

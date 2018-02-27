@@ -15,4 +15,8 @@ class Listing < ApplicationRecord
   def ended?
     end_time.present? && end_time < Time.zone.now
   end
+
+  def active?
+    end_time.present?
+  end
 end

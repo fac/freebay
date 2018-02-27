@@ -10,7 +10,8 @@
   <div class="ui fixed menu">
     <div class="ui container">
       <div class="header item">
-        <%= image_tag "freeBay-logo.svg", class: "logo" %>
+          <%= image_tag "freeBay-logo.svg", class: "logo" %>
+          <%= link_to "Home", root_path %>
       </div>
       <div class="right menu">
         <% if signed_in? %>

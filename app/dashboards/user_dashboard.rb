@@ -11,6 +11,8 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    first_name: Field::String,
+    last_name: Field::String,
     email: Field::String,
     encrypted_password: Field::String,
     confirmation_token: Field::String,
@@ -27,6 +29,8 @@ class UserDashboard < Administrate::BaseDashboard
     :created_at,
     :updated_at,
     :email,
+    :first_name,
+    :last_name,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,6 +39,8 @@ class UserDashboard < Administrate::BaseDashboard
     :id,
     :created_at,
     :updated_at,
+    :first_name,
+    :last_name,
     :email,
     :encrypted_password,
     :confirmation_token,
@@ -45,6 +51,8 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
+    :first_name,
+    :last_name,
     :email,
     :encrypted_password,
     :confirmation_token,
