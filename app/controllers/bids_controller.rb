@@ -1,6 +1,7 @@
 class BidsController < ApplicationController
 
   before_action :load_listing
+  before_action :check_status
 
   def new
     if @listing.ended?
@@ -30,6 +31,13 @@ class BidsController < ApplicationController
 
     def load_listing
       @listing = Listing.find(params[:listing_id])
+    end
+
+    def check_status
+      unless @listing.active?
+        flash[:notice] = "Hold your horses, bidding hasn't started yet! 🐴"
+        redirect_to listing_path(@listing)
+      end
     end
 
     def bid_params
