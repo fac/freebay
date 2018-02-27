@@ -19,7 +19,7 @@ class BidsController < ApplicationController
     @bid = Bid.new bid_params.merge(listing: @listing, user: current_user)
     if @bid.save
       flash[:notice] = "Your bid was successful - you're the highest bidder!"
-      redirect_to lisdting_path(@listing)
+      redirect_to listing_path(@listing)
     else
       flash[:error] = @bid.errors.full_messages.to_sentence
       render 'new'
