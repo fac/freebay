@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :listings do
+    get :show
     resources :bids
   end
 

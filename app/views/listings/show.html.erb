@@ -1,0 +1,33 @@
+<h1 class="ui header"><%= @listing.title %></h1>
+
+<p>
+  <% if @listing.bids.present? %>
+    <%= pluralize @listing.bids.count, "bid" %> on this item.
+    The current price is
+    <strong><%= number_to_currency @listing.winning_bid, unit: "£" %></strong>.
+  <% else %>
+    No bids yet. Feeling lucky?
+  <% end %>
+</p>
+
+<p>
+  <%= link_to "Bid now", new_listing_bid_path(@listing), class: "ui primary button" %>
+</p>
+
+<div class="ui grid listing">
+  <div class="eight wide column">
+    <%= image_tag @listing.image.url(:medium) %>
+  </div>
+
+  <div class="eight wide column">
+    <h3 class="ui header">Description</h3>
+
+    <p>
+      <%= markdown @listing.description %>
+    </p>
+  </div>
+
+  <div class="sixteen wide column">
+
+  </div>
+</div>
