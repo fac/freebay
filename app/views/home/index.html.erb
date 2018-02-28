@@ -2,12 +2,8 @@
   Auctions
 </h1>
 
-<p>
-  Here are your listings!
-</p>
-
 <% if @listings.empty? %>
-  <p>No auctions!</p>
+  <p>There are no auctions.</p>
 <% else %>
   <%= render 'listings' %>
 <% end %>

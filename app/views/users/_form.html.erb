@@ -19,11 +19,11 @@
     <%= form.password_field :password %>
   </div>
 
-  <%= form.submit "Sign up", class: "ui primary button"  %>
-<% end %>
+  <div class="field">
+    <%= form.submit "Sign up", class: "fluid ui primary button"  %>
+  </div>
 
-<div class="ui message">
   <p>
-    Have an account? <%= link_to "Sign in", sign_in_path %>
+    Already got an account? <%= link_to "Sign in →", sign_in_path %>
   </p>
-</div>
+<% end %>

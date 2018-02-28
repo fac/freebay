@@ -1,4 +1,42 @@
+body {
+  border-top: #007abf 4px solid !important;
+  background: #f2f7fb !important;
+  position: relative;
+}
+
 .column {
-  max-width: 450px;
-  margin-top: 100px;
+  max-width: 400px;
+  margin-top: 60px;
+}
+
+.login_header {
+  text-align: center;
+  padding: 0 0 24px 0;
+}
+
+.login_header img {
+  max-width: 24em;
+  margin-left: 2em;
+}
+
+.login_header h2 {
+  color: #007abf;
+  font-weight: normal;
+  margin: 0;
+  padding: 24px 0 48px 0;
+}
+
+.primary.button {
+  background: #7ebb4c !important;
+}
+
+.primary.button.disabled {
+  opacity: 0.9 !important;
+}
+
+.gavel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 300px;
 }
