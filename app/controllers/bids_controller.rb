@@ -1,7 +1,11 @@
 class BidsController < ApplicationController
 
-  before_action :load_listing
-  before_action :check_status
+  before_action :load_listing, only: [:new, :create]
+  before_action :check_status, only: [:new, :create]
+
+  def index
+    @bids = current_user.bids.includes(:listing).order("created_at DESC")
+  end
 
   def new
     if @listing.ended?

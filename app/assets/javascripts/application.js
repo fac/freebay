@@ -19,12 +19,15 @@
 //= require semantic-ui
 
 $(document).ready(function() {
+  $('.message .close')
+    .on('click', function() {
+      $(this)
+        .closest('.message')
+        .transition('fade');
+    });
+});
 
-$('.message .close')
-  .on('click', function() {
-    $(this)
-      .closest('.message')
-      .transition('fade');
-  });
-
+$(document).on('turbolinks:load', function() {
+  $('.ui.dropdown')
+    .dropdown();
 });

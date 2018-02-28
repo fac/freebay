@@ -5,7 +5,7 @@
 </p>
 <p>
   <% if @listing.bids.present? %>
-    The current winning bid is <%= number_to_currency @listing.winning_bid, unit: "£" %>.
+    The current winning bid is <%= number_to_currency @listing.winning_bid %>.
   <% else %>
     You're the first bidder – don't hold back!
   <% end %>
