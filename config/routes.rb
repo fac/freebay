@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resource :session, controller: "clearance/sessions", only: [:create]
 
   resources :users, only: [:create] do
+    resources :bids, only: [:index]
     resource :password,
       controller: "clearance/passwords",
       only: [:create, :edit, :update]

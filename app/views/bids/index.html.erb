@@ -1,0 +1,24 @@
+<h2 class="ui header">
+  My Bids
+</h2>
+
+<% if @bids.empty? %>
+  You don't got no bids, Cowboy 🤠
+<% else %>
+  <table class="ui celled table">
+    <thead>
+      <tr><th>Item</th>
+      <th>Bid time</th>
+      <th>Bid Amount</th>
+    </tr></thead>
+    <tbody>
+      <% @bids.each do |bid| %>
+      <tr>
+        <td><%= link_to bid.listing.title, listing_path(bid.listing) %></td>
+        <td><%= bid.created_at.to_s :short %></td>
+        <td><%= number_to_currency bid.amount %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
