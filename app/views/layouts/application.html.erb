@@ -9,10 +9,7 @@
 <body>
   <div class="ui fixed menu">
     <div class="ui container">
-      <div class="header item">
-          <%= image_tag "freeBay-logo.svg", class: "logo" %>
-          <%= link_to "Home", root_path %>
-      </div>
+      <%= link_to image_tag("freeBay-logo.svg"), root_path, class: "logo" %>
       <div class="right menu">
         <% if signed_in? %>
           <div class="item">
@@ -28,7 +25,7 @@
     </div>
   </div>
 
-  <div class="ui main text container">
+  <div class="ui main container">
     <% flash.each do |key, value| %>
       <div class="<%= flash_class(key) %> closable">
         <i class="close icon"></i>
@@ -41,8 +38,8 @@
 
   <div class="ui vertical footer segment">
     <div class="ui center aligned container">
-      <p>Built with 💖 at FreeAgent</p>
-      <p>Hack Days Feb 2018</p>
+      <h4>Built with <span style="margin-left:2px; position:relative; bottom:-3px; font-size:1.5em;">💚</span> at FreeAgent</h4>
+      <p style="opacity:0.4;">Hack Days Feb 2018</p>
     </div>
   </div>
 </body>

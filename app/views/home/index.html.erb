@@ -3,10 +3,7 @@
 </h1>
 
 <% if @listings.empty? %>
-  <p>There are literally no auctions! It's time to add some.</p>
+  <p>There are no auctions.</p>
 <% else %>
-  <p>
-    Here are your listings!
-  </p>
   <%= render 'listings' %>
 <% end %>

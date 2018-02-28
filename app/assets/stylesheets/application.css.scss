@@ -21,19 +21,30 @@ body {
   flex-direction: column;
 }
 
+.ui.menu .item {
+  padding: 1.3em 1.2em;
+}
+
 .ui.menu .item img.logo {
   margin-right: 1.5em;
 }
 .ui.container {
-  margin-top: 7em;
   flex: 1;
+}
+.main.container {
+  background-image: image-url("winston.svg");
+  background-size: 110px;
+  background-position: 90% 110%;
+  background-repeat: no-repeat;
+  margin-top: 7em;
+  padding-bottom: 5em;
 }
 .wireframe {
   margin-top: 2em;
 }
 .ui.footer.segment {
-  margin: 5em 0em 0em;
-  padding: 5em 0em;
+  margin: 0;
+  padding: 3em 0;
   background-color: #00314c;
   color: #FFF;
 }
@@ -42,7 +53,18 @@ body {
   margin-top: 1em;
 }
 
-.ui.menu .item > img.logo {
+.ui.menu {
+  min-height: auto !important;
+}
+
+.ui.menu .logo {
+  display: flex;
+  flex-grow: 1;
+  margin-left: 1em !important;
+}
+
+.ui.menu .logo img {
+  align-self: center;
+  max-width: 140px;
   width: auto !important;
-  max-width: 100px;
 }
