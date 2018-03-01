@@ -6,11 +6,13 @@
       </div>
       <div class="content">
         <div class="header"><%= listing.title %></div>
-        <% unless listing.bids.empty? %>
         <div class="meta">
+        <% unless listing.bids.empty? %>
           Offers over <%= number_to_currency listing.bids.maximum(:amount) %>
-        </div>
+        <% else %>
+          Starting price <%= number_to_currency listing.starting_price %>
         <% end %>
+        </div>
       </div>
       <div class="extra content">
         <span class="right floated">
