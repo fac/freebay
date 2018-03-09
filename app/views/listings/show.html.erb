@@ -8,6 +8,8 @@
     <strong><%= number_to_currency @listing.winning_bid %></strong>.
   <% else %>
     No bids yet. Feeling lucky?
+    The starting price is
+    <strong><%= number_to_currency @listing.starting_price %></strong>.
   <% end %>
   </p>
 
