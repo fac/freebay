@@ -18,4 +18,8 @@ class Bid < ApplicationRecord
       errors.add(:amount, "cannot be lower than the starting price of #{listing.starting_price}")
     end
   end
+
+  def winning?
+    self.id == listing.bids.order("amount DESC").first.id
+  end
 end
