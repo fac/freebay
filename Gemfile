@@ -30,6 +30,7 @@ gem 'administrate-field-paperclip'
 gem "paperclip", "~> 5.2.1"
 gem 'aws-sdk', '~> 2.3'
 gem 'redcarpet'
+gem 'rollbar'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
