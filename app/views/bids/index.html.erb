@@ -10,6 +10,7 @@
       <tr><th>Item</th>
       <th>Bid time</th>
       <th>Bid Amount</th>
+      <th>Winning?</th>
     </tr></thead>
     <tbody>
       <% @bids.each do |bid| %>
@@ -17,6 +18,13 @@
         <td><%= link_to bid.listing.title, listing_path(bid.listing) %></td>
         <td><%= bid.created_at.to_s :short %></td>
         <td><%= number_to_currency bid.amount %></td>
+        <td>
+          <% if bid.winning? %>
+            ✅
+          <% else %>
+            😰
+          <% end %>
+        </td>
       </tr>
       <% end %>
     </tbody>
