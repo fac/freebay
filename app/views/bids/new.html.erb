@@ -12,6 +12,10 @@
   <% end %>
 </p>
 
+<p>
+  <strong>Note: The price you enter is the price you will pay! There is no auto-bidding.</strong>
+</p>
+
 <%= form_for [@listing, @bid], html: { class: "ui form" } do |form| %>
   <div class="inline field">
     <%= form.label :amount %>
