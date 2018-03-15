@@ -8,6 +8,8 @@ class Listing < ApplicationRecord
   validates_attachment_content_type :image,
       content_type: /\Aimage\/.*\z/
 
+  scope :active, -> { where("end_time IS NOT NULL") }
+
   def winning_bid
     bids.maximum(:amount) || 0
   end
