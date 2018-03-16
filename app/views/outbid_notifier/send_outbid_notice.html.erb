@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Dear <%= @user.first_name %></p>
+
+    <p>It's not good news. You have been unscrupulously outbid on the <%= @listing.title %> listing.</p>
+    <p>The new winning bid is <%= number_to_currency @new_winning_bid.amount %>. Dig deep, don't let them get away with it!</p>
+
+    <p>FreeBay Bot 🤖</p>
+  </body>
+</html>
