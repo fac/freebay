@@ -19,10 +19,14 @@ class BidsController < ApplicationController
   def create
     @listing.lock!
 
+    current_winning_bid = @listing.winning_bid
+
     # don't use `@listing.bids.build` since we don't want `@listing` to be aware of
     # unsaved bids
     @bid = Bid.new bid_params.merge(listing: @listing, user: current_user)
     if @bid.save
+      OutbidNotifier.send_outbid_notice(current_winning_bid, @bid).deliver
+
       flash[:notice] = "Your bid was successful - you're the highest bidder!"
       redirect_to listing_path(@listing)
     else

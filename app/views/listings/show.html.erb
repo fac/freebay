@@ -5,7 +5,7 @@
   <% if @listing.bids.present? %>
     <%= pluralize @listing.bids.count, "bid" %> on this item.
     The current price is
-    <strong><%= number_to_currency @listing.winning_bid %></strong>.
+    <strong><%= number_to_currency @listing.winning_bid_amount %></strong>.
   <% else %>
     No bids yet. Feeling lucky?
     The starting price is
