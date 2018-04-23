@@ -35,7 +35,8 @@ class ListingDashboard < Administrate::BaseDashboard
     :title,
     :description,
     :image,
-    :is_archived
+    :is_archived,
+    :updated_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
