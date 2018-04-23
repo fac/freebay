@@ -8,7 +8,7 @@ class Listing < ApplicationRecord
   validates_attachment_content_type :image,
       content_type: /\Aimage\/.*\z/
 
-  scope :active, -> { where("end_time IS NOT NULL") }
+  scope :active, -> { where("end_time IS NOT NULL").where("is_archived <> TRUE") }
 
   def winning_bid_amount
     bids.maximum(:amount) || 0
@@ -23,6 +23,6 @@ class Listing < ApplicationRecord
   end
 
   def active?
-    end_time.present?
+    end_time.present? && !is_archived?
   end
 end
