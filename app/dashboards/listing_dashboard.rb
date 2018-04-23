@@ -14,6 +14,7 @@ class ListingDashboard < Administrate::BaseDashboard
     reserve_price: Field::String.with_options(searchable: false),
     starting_price: Field::String.with_options(searchable: false),
     start_time: Field::DateTime,
+    is_archived: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     image_file_name: Field::String,
@@ -34,6 +35,7 @@ class ListingDashboard < Administrate::BaseDashboard
     :title,
     :description,
     :image,
+    :is_archived
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -45,6 +47,7 @@ class ListingDashboard < Administrate::BaseDashboard
     :reserve_price,
     :starting_price,
     :start_time,
+    :is_archived,
     :created_at,
     :updated_at,
     :end_time,
@@ -61,6 +64,7 @@ class ListingDashboard < Administrate::BaseDashboard
     :starting_price,
     :start_time,
     :end_time,
+    :is_archived,
     :image,
   ].freeze
 
