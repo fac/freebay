@@ -31,8 +31,8 @@ gem "paperclip", "~> 5.2.1"
 gem 'aws-sdk', '~> 2.3'
 gem 'redcarpet'
 gem 'rollbar'
-gem 'newrelic_rpm'
 gem 'sendgrid-ruby'
+gem 'scout_apm'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
