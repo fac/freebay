@@ -22,7 +22,6 @@ class CreateBid
     winning_bid = listing.winning_bid
 
     if winning_bid.nil?
-      # no bids, set current price of listing to current price
       listing.current_price = listing.starting_price
       logger.info "First bid. Setting listing #{listing.id} current price to #{listing.current_price}"
       listing.save! and return
