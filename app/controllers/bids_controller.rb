@@ -21,8 +21,14 @@ class BidsController < ApplicationController
 
     # don't use `@listing.bids.build` since we don't want `@listing` to be aware of
     # unsaved bids
-    @bid = CreateBid.call(Bid.new(bid_params.merge(listing: @listing, user: current_user)))
-    if @bid.errors.empty? && @bid.save
+    @bid = Bid.new(bid_params.merge(listing: @listing, user: current_user))
+    unless @bid.valid?
+      flash[:error] = @bid.errors.full_messages.to_sentence
+      render 'new' and return
+    end
+
+    @bid = autobid(@bid)
+    if @bid.errors.empty?
       flash[:notice] = "Your bid was successful - you're the highest bidder!"
       redirect_to listing_path(@listing)
     else
@@ -46,5 +52,55 @@ class BidsController < ApplicationController
 
     def bid_params
       params.require(:bid).permit(:amount)
+    end
+
+    def autobid(bid)
+      winning_bid = bid.listing.winning_bid
+
+      if winning_bid.nil?
+        bid.save!
+
+        logger.info "First bid. Setting listing #{bid.listing.id} current price to #{bid.listing.current_price}"
+        bid.listing.update_attribute :current_price, bid.listing.starting_price
+        return bid
+      end
+
+      logger.info "New bid! Current winning bid #{winning_bid.id} amount is #{winning_bid.amount}. Listing current price is #{bid.listing.current_price}"
+
+      if bid.user_id == winning_bid.user_id
+        logger.info "User #{bid.user_id} trying to increase maximum bid"
+        # if this is a new bid by the same user, only accept it if it's higher (i.e. they're increasing their max bid)
+        if bid.amount <= winning_bid.amount
+          logger.info "Amount of #{bid.amount} is not higher than existing max bid of #{winning_bid.amount}"
+          bid.errors.add(:amount, "must be greater than your existing maximum bid of #{winning_bid.amount}")
+        else
+          bid.save!
+        end
+      else
+        if bid.amount <= bid.listing.current_price
+          bid.errors.add(:amount, "must be greater than current listing price of #{bid.listing.current_price}")
+          return bid
+        end
+
+        if bid.amount <= winning_bid.amount
+          bid.save!
+          logger.info "New bid amount of #{bid.amount} is <= to winning bid amount #{winning_bid.amount}"
+
+          logger.info "Setting current_price to #{bid.listing.current_price}"
+          bid.listing.update_attribute :current_price, [winning_bid.amount, BidIncrement.increment(bid.amount)].min
+
+          bid.errors.add(:amount, "must be greater than #{bid.listing.current_price}")
+        else
+          logger.info "New bid amount of #{bid.amount} is higher than current winning bid amount #{winning_bid.amount}"
+          bid.save!
+
+          logger.info "Setting current_price to #{bid.listing.current_price}"
+          bid.listing.update_attribute :current_price, [bid.amount, BidIncrement.increment(winning_bid.amount)].min
+
+          OutbidNotifier.send_outbid_notice(winning_bid, bid).deliver
+        end
+      end
+
+      bid
     end
 end
