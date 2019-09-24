@@ -16,6 +16,21 @@
   Happy bidding! 🤑
 </p>
 
+<h4 class="ui header">
+  <i class="trophy icon"></i>
+  <div class="content">
+     Item Condition:
+    <div class="ui inline dropdown">
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <% Listing::CONDITION.each do |condition| %>
+          <div class="item"> <a href="/?condition=<%= condition %>"> <%= condition %> </a> </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</h4>
+
 <% if @listings.empty? %>
   <p>There are no auctions.</p>
 <% else %>
