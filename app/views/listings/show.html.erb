@@ -60,7 +60,7 @@
     <th>Bid</th>
   </tr></thead>
   <tbody>
-    <% @listing.bids.order("created_at DESC").each do |bid| %>
+    <% @listing.bids.order("amount DESC").each do |bid| %>
     <tr>
       <td><%= bid.created_at.to_s :short %></td>
       <td><%= bid.user.name %></td>
