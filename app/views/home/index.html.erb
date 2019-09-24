@@ -24,7 +24,22 @@
       <i class="dropdown icon"></i>
       <div class="menu">
         <% Listing::CONDITION.each do |condition| %>
-          <div class="item"> <a href="/?condition=<%= condition %>"> <%= condition %> </a> </div>
+          <a class="item" href="/?condition=<%= condition %>"> <%= condition %> </a>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</h4>
+
+<h4 class="ui header">
+  <i class="trophy icon"></i>
+  <div class="content">
+     Item Category:
+    <div class="ui inline dropdown">
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <% Listing::CATEGORIES.each do |category| %>
+          <a class="item" href="/?category=<%= category %>"> <%= category %> </a>
         <% end %>
       </div>
     </div>

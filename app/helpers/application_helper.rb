@@ -31,4 +31,8 @@ module ApplicationHelper
   def listing_conditon_tag(listing)
     link_to(listing.condition, "#", {class: "ui green label" })
   end
+
+  def listing_category_tag(listing)
+    link_to(listing.category, "#", {class: "ui orange label" })
+  end
 end

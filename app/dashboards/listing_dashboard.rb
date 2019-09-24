@@ -24,6 +24,7 @@ class ListingDashboard < Administrate::BaseDashboard
     end_time: Field::DateTime,
     image: Field::Paperclip,
     condition: Field::Select.with_options(searchable: true, collection: Listing::CONDITION),
+    category: Field::Select.with_options(searchable: true, collection: Listing::CATEGORIES),
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -35,6 +36,7 @@ class ListingDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :condition,
+    :category,
     :description,
     :is_archived,
     :updated_at,
@@ -46,6 +48,7 @@ class ListingDashboard < Administrate::BaseDashboard
     :id,
     :title,
     :condition,
+    :category,
     :description,
     :reserve_price,
     :starting_price,
@@ -63,6 +66,7 @@ class ListingDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = [
     :title,
     :condition,
+    :category,
     :description,
     :reserve_price,
     :starting_price,

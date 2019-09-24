@@ -42,7 +42,34 @@ RSpec.describe Listing, type: :model do
   end
 
   context "validations" do
-    context "on the condition" do
+    context "for categories" do
+      it "allows an empty string" do
+        listing = FactoryBot.build(:listing, category:"")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'laptop" do
+        listing = FactoryBot.build(:listing, category:"laptops")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'mobiles" do
+        listing = FactoryBot.build(:listing, category:"mobiles")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'misc" do
+        listing = FactoryBot.build(:listing, category:"misc")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is not valid when 'toaster'" do
+        listing = FactoryBot.build(:listing, category:"toaster")
+        expect(listing.valid?).to eq(false)
+      end
+    end
+
+    context "for conditions" do
       it "allows an empty string" do
         listing = FactoryBot.build(:listing, condition:"")
         expect(listing.valid?).to eq(true)
@@ -61,7 +88,6 @@ RSpec.describe Listing, type: :model do
       it "is not valid when 'a bit dodgy'" do
         listing = FactoryBot.build(:listing, condition:"a bit dodgy")
         expect(listing.valid?).to eq(false)
-        expect(listing.errors.messages[:condition].first).to eq("Must be used or new")
       end
     end
   end
