@@ -27,4 +27,8 @@ module ApplicationHelper
 
     markdown.render(text).html_safe
   end
+
+  def listing_conditon_tag(listing)
+    link_to(listing.condition, "#", {class: "ui green label" })
+  end
 end

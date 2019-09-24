@@ -23,6 +23,7 @@ class ListingDashboard < Administrate::BaseDashboard
     image_updated_at: Field::DateTime,
     end_time: Field::DateTime,
     image: Field::Paperclip,
+    condition: Field::Select.with_options(searchable: true, collection: Listing::CONDITION),
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -33,10 +34,10 @@ class ListingDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = [
     :id,
     :title,
+    :condition,
     :description,
-    :image,
     :is_archived,
-    :updated_at
+    :updated_at,
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -44,6 +45,7 @@ class ListingDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = [
     :id,
     :title,
+    :condition,
     :description,
     :reserve_price,
     :starting_price,
@@ -60,6 +62,7 @@ class ListingDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = [
     :title,
+    :condition,
     :description,
     :reserve_price,
     :starting_price,
