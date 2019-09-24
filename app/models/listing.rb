@@ -1,5 +1,9 @@
 class Listing < ApplicationRecord
+  CONDITION = ["used", "new"]
+
   has_many :bids, dependent: :destroy
+  validates :condition, inclusion: { in: Listing::CONDITION,
+    message: "Must be used or new"}, allow_blank: true
 
   has_attached_file :image,
       styles: { medium: "300x300#", thumb: "100x100>" },

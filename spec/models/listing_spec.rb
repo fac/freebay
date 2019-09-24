@@ -40,4 +40,29 @@ RSpec.describe Listing, type: :model do
 
     expect(listing.winning_bid).to eq(bid3)
   end
+
+  context "validations" do
+    context "on the condition" do
+      it "allows an empty string" do
+        listing = FactoryBot.build(:listing, condition:"")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'used'" do
+        listing = FactoryBot.build(:listing, condition:"used")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'new'" do
+        listing = FactoryBot.build(:listing, condition:"used")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is not valid when 'a bit dodgy'" do
+        listing = FactoryBot.build(:listing, condition:"a bit dodgy")
+        expect(listing.valid?).to eq(false)
+        expect(listing.errors.messages[:condition].first).to eq("Must be used or new")
+      end
+    end
+  end
 end
