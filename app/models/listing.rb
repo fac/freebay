@@ -10,10 +10,6 @@ class Listing < ApplicationRecord
 
   scope :active, -> { where("end_time IS NOT NULL").where("is_archived <> TRUE") }
 
-  def winning_bid_amount
-    bids.maximum(:amount) || 0
-  end
-
   def winning_bid
     bids.order("amount DESC").first
   end

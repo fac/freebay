@@ -8,7 +8,7 @@
         <div class="header"><%= listing.title %></div>
         <div class="meta">
         <% unless listing.bids.empty? %>
-          Offers over <%= number_to_currency listing.bids.maximum(:amount) %>
+          Offers over <%= number_to_currency listing.current_price %>
         <% else %>
           Starting price <%= number_to_currency listing.starting_price %>
         <% end %>

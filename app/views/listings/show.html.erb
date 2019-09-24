@@ -1,17 +1,25 @@
 <h1 class="ui header"><%= @listing.title %></h1>
 
 <% if @listing.active? %>
-  <p>
   <% if @listing.bids.present? %>
+    <p>
     <%= pluralize @listing.bids.count, "bid" %> on this item.
     The current price is
-    <strong><%= number_to_currency @listing.winning_bid_amount %></strong>.
+    <strong><%= number_to_currency @listing.current_price %></strong>.
+    </p>
+    <p>
+    <% if current_user == @listing.winning_bid.user %>
+      You're the winning bidder!
+
+      Your maximum bid is currently <%= number_to_currency @listing.winning_bid.amount %>.
+    <% end %>
+    </p>
   <% else %>
-    No bids yet. Feeling lucky?
-    The starting price is
+    <p>
+    No bids yet. Feeling lucky? The starting price is
     <strong><%= number_to_currency @listing.starting_price %></strong>.
+    </p>
   <% end %>
-  </p>
 
   <p>
     <%= link_to "Bid now", new_listing_bid_path(@listing), class: "ui primary button" %>

@@ -21,9 +21,8 @@ class BidsController < ApplicationController
 
     # don't use `@listing.bids.build` since we don't want `@listing` to be aware of
     # unsaved bids
-    result = CreateBid.call(Bid.new(bid_params.merge(listing: @listing, user: current_user)))
-    @bid = result.bid
-    if result.success?
+    @bid = CreateBid.call(Bid.new(bid_params.merge(listing: @listing, user: current_user)))
+    if @bid.errors.empty? && @bid.save
       flash[:notice] = "Your bid was successful - you're the highest bidder!"
       redirect_to listing_path(@listing)
     else
