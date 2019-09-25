@@ -29,10 +29,18 @@ module ApplicationHelper
   end
 
   def listing_conditon_tag(listing)
-    content_tag(:div, humanized_condition(listing.condition), class: "ui orange label")
+    content_tag(:div, humanized_condition(listing.condition), class: "ui label " << condition_colour(listing.condition))
+  end
+
+  def condition_colour(condition)
+    {
+      "good" => "green",
+      "poor" => "orange",
+      "requires_repair" => "red"
+    }[condition]
   end
 
   def listing_category_tag(listing)
-    content_tag(:div, humanized_category(listing.category), class: "ui green label")
+    content_tag(:div, humanized_category(listing.category), class: "ui grey label")
   end
 end
