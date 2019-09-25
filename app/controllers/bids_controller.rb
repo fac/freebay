@@ -1,7 +1,9 @@
 class BidsController < ApplicationController
 
-  before_action :load_listing, only: [:new, :create]
-  before_action :check_status, only: [:new, :create]
+  include ActionView::Helpers::NumberHelper
+
+  before_action :load_listing, only: [:new, :create, :update, :destroy]
+  before_action :check_status, only: [:new, :create, :update, :destroy]
 
   def index
     @bids = current_user.bids.includes(:listing).order("created_at DESC")
@@ -16,6 +18,14 @@ class BidsController < ApplicationController
     @bid = Bid.new(listing: @listing, user: current_user)
   end
 
+  def update
+    redirect_to listing_path(@listing)
+  end
+
+  def destroy
+    redirect_to listing_path(@listing)
+  end
+
   def create
     @listing.lock!
 
@@ -27,9 +37,12 @@ class BidsController < ApplicationController
       render 'new' and return
     end
 
-    @bid = autobid(@bid)
+    ActiveRecord::Base.transaction do
+      @bid = autobid(@bid)
+    end
+
     if @bid.errors.empty?
-      flash[:notice] = "Your bid was successful - you're the highest bidder!"
+      flash[:notice] = "Your bid was successful - you're the highest bidder! The current price is #{number_to_currency @listing.current_price}"
       redirect_to listing_path(@listing)
     else
       flash[:error] = @bid.errors.full_messages.to_sentence
@@ -72,7 +85,7 @@ class BidsController < ApplicationController
         # if this is a new bid by the same user, only accept it if it's higher (i.e. they're increasing their max bid)
         if bid.amount <= winning_bid.amount
           logger.info "Amount of #{bid.amount} is not higher than existing max bid of #{winning_bid.amount}"
-          bid.errors.add(:amount, "must be greater than your existing maximum bid of #{winning_bid.amount}")
+          bid.errors.add(:amount, "must be greater than your existing maximum bid of #{number_to_currency winning_bid.amount}")
         else
           bid.save!
         end
@@ -89,9 +102,9 @@ class BidsController < ApplicationController
           logger.info "Setting current_price to #{bid.listing.current_price}"
           bid.listing.update_attribute :current_price, [winning_bid.amount, BidIncrement.increment(bid.amount)].min
 
-          bid.errors.add(:amount, "must be greater than #{bid.listing.current_price}")
+          bid.errors.add(:base, "Bad luck, someone has bid a higher price. Your maximum bid must be greater than #{number_to_currency bid.listing.current_price}")
         else
-          logger.info "New bid amount of #{bid.amount} is higher than current winning bid amount #{winning_bid.amount}"
+          logger.info "New bid amount of #{bid.amount} is higher than current winning bid amount #{number_to_currency winning_bid.amount}"
           bid.save!
 
           logger.info "Setting current_price to #{bid.listing.current_price}"

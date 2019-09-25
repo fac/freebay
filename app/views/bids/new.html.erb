@@ -2,6 +2,8 @@
 
 <p>
   You're about to bid on <strong><%= @listing.title %></strong>.
+  Time left: <%= distance_of_time_in_words Time.now, @listing.end_time %>
+  <em>(<%= (@listing.end_time.to_s :short) %>)</em>
 </p>
 <p>
   <% if @listing.bids.present? %>
@@ -12,13 +14,9 @@
   <% end %>
 </p>
 
-<p>
-  <strong>Note: The price you enter is the price you will pay! There is no auto-bidding.</strong>
-</p>
-
 <%= form_for [@listing, @bid], html: { class: "ui form" } do |form| %>
   <div class="inline field">
-    <%= form.label :amount %>
+    <%= form.label "Your maximum Bid" %>
     <%= form.text_field :amount %>
   </div>
 

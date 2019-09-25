@@ -7,11 +7,13 @@
     The current price is
     <strong><%= number_to_currency @listing.current_price %></strong>.
     </p>
-    <p>
     <% if current_user == @listing.winning_bid.user %>
-      You're the winning bidder!
+      <p>You're the winning bidder! 🎉</p>
 
+      <p>
       Your maximum bid is currently <%= number_to_currency @listing.winning_bid.amount %>.
+      FreeBay will automatically bid for you up to this amount.
+      </p>
     <% end %>
     </p>
   <% else %>
