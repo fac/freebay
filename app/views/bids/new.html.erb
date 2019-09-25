@@ -16,7 +16,7 @@
 
 <%= form_for [@listing, @bid], html: { class: "ui form" } do |form| %>
   <div class="inline field">
-    <%= form.label "Your maximum Bid" %>
+    <%= form.label :amount, "Your Maximum Bid" %>
     <%= form.text_field :amount %>
   </div>
 
