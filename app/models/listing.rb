@@ -1,6 +1,6 @@
 class Listing < ApplicationRecord
-  CONDITION = %w(used as_new).freeze
-  CATEGORIES = %w(laptops mobiles misc).freeze
+  CONDITION = %w(good poor requires_repair).freeze
+  CATEGORIES = %w(macbook_air macbook_pro iphone ipad misc).freeze
 
   has_many :bids, dependent: :destroy
 
