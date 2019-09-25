@@ -3,13 +3,13 @@ class Bid < ApplicationRecord
   belongs_to :user
 
   validates :amount, numericality: { greater_than: 0 }
-  validate :amount_cannot_be_lower_than_highest_bid, unless: ->(bid) { bid.amount.blank? }
+  validate :amount_cannot_be_lower_than_current_listing_price, unless: ->(bid) { bid.amount.blank? }
   validate :amount_must_be_greater_than_the_starting_price, unless: ->(bid) { bid.amount.blank? }
 
-  def amount_cannot_be_lower_than_highest_bid
-    current_maximum_bid = listing.bids.maximum(:amount) || 0
-    if amount <= current_maximum_bid
-      errors.add(:amount, "must be greater than #{current_maximum_bid}")
+  def amount_cannot_be_lower_than_current_listing_price
+    return if listing.bids.empty?
+    if listing.current_price && amount <= listing.current_price
+      errors.add(:amount, "must be greater than #{listing.current_price}")
     end
   end
 

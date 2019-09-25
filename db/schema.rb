@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_131716) do
     t.datetime "end_time"
     t.decimal "starting_price", default: "0.0", null: false
     t.boolean "is_archived", default: false
+    t.decimal "current_price"
     t.string "condition"
     t.string "category"
   end

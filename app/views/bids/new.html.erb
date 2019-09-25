@@ -2,23 +2,29 @@
 
 <p>
   You're about to bid on <strong><%= @listing.title %></strong>.
+  Time left: <%= distance_of_time_in_words Time.now, @listing.end_time %>
+  <em>(<%= (@listing.end_time.to_s :short) %>)</em>
 </p>
-<p>
   <% if @listing.bids.present? %>
-    The current winning bid is <strong><%= number_to_currency @listing.winning_bid_amount %></strong>.
+    <p>
+    The current winning bid is <strong><%= number_to_currency @listing.current_price %></strong>.
+    </p>
+
+    <% if current_user == @listing.winning_bid.user %>
+      <p>You're the winning bidder and your maximum bid is <%= number_to_currency @listing.winning_bid.amount %>
+      </p>
+    <% end %>
   <% else %>
+    <p>
     You're the first bidder – don't hold back! Starting price for this item is
     <strong><%= number_to_currency @listing.starting_price %></strong>.
+    </p>
   <% end %>
-</p>
 
-<p>
-  <strong>Note: The price you enter is the price you will pay! There is no auto-bidding.</strong>
-</p>
 
 <%= form_for [@listing, @bid], html: { class: "ui form" } do |form| %>
   <div class="inline field">
-    <%= form.label :amount %>
+    <%= form.label :amount, "Your Maximum Bid" %>
     <%= form.text_field :amount %>
   </div>
 
