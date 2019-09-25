@@ -1,5 +1,14 @@
 class Listing < ApplicationRecord
+  CONDITION = %w(good poor requires_repair).freeze
+  CATEGORIES = %w(macbook_air macbook_pro iphone ipad misc).freeze
+
   has_many :bids, dependent: :destroy
+
+  validates :condition, inclusion: { in: Listing::CONDITION,
+    message: "must be one of #{Listing::CONDITION.join(", ")}"}, allow_blank: true
+
+  validates :category, inclusion: { in: Listing::CATEGORIES,
+    message: "must be one of #{Listing::CATEGORIES.join(", ")}"}, allow_blank: true
 
   has_attached_file :image,
       styles: { medium: "300x300#", thumb: "100x100>" },

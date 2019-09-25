@@ -40,4 +40,55 @@ RSpec.describe Listing, type: :model do
 
     expect(listing.winning_bid).to eq(bid3)
   end
+
+  context "validations" do
+    context "for categories" do
+      it "allows an empty string" do
+        listing = FactoryBot.build(:listing, category:"")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'macbook_pro" do
+        listing = FactoryBot.build(:listing, category:"macbook_pro")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'iphone" do
+        listing = FactoryBot.build(:listing, category:"iphone")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'misc" do
+        listing = FactoryBot.build(:listing, category:"misc")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is not valid when 'toaster'" do
+        listing = FactoryBot.build(:listing, category:"toaster")
+        expect(listing.valid?).to eq(false)
+      end
+    end
+
+    context "for conditions" do
+      it "allows an empty string" do
+        listing = FactoryBot.build(:listing, condition:"")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'good'" do
+        listing = FactoryBot.build(:listing, condition:"good")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is valid when 'poor'" do
+        listing = FactoryBot.build(:listing, condition:"poor")
+        expect(listing.valid?).to eq(true)
+      end
+
+      it "is not valid when 'a bit dodgy'" do
+        listing = FactoryBot.build(:listing, condition:"a bit dodgy")
+        expect(listing.valid?).to eq(false)
+      end
+    end
+  end
 end
