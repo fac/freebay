@@ -40,7 +40,11 @@
   </div>
 
   <div class="eight wide column">
-    <h3 class="ui header">Description <%= listing_conditon_tag(@listing) %> <%= listing_category_tag(@listing) %> </h3>
+    <h3 class="ui header">Description <%= listing_conditon_tag(@listing) %> <%= listing_category_tag(@listing) %>
+      <div class="sub header">
+        <%= humanized_end_time(@listing) %>
+      </div>
+    </h3>
 
     <p>
       <%= markdown @listing.description %>
