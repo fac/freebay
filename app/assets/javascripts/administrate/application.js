@@ -8,7 +8,7 @@
 
 $(document).ready(function() {
   $('#toggle_archived').change(function(e) {
-    const params = new URLSearchParams(location.search)
+    var params = new URLSearchParams(location.search)
     params.set("show_archived", e.target.checked)
     location.search = params.toString();
   });

@@ -32,13 +32,13 @@ $(document).on('turbolinks:load', function() {
     .dropdown();
 
   $("#condition_select").on('change', function(e) {
-    const params = new URLSearchParams(location.search)
+    var params = new URLSearchParams(location.search)
     params.set("condition", e.target.selectedOptions[0].value)
     location.search = params.toString();
   });
 
   $("#category_select").on('change', function(e) {
-    const params = new URLSearchParams(location.search)
+    var params = new URLSearchParams(location.search)
     params.set("category", e.target.selectedOptions[0].value)
     location.search = params.toString();
   });
