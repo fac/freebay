@@ -5,6 +5,6 @@ class HomeController < ApplicationController
     @listings = Listing.all
     @listings = @listings.where(condition: params[:condition]) if (params[:condition] && params[:condition] != "all")
     @listings = @listings.where(category: params[:category]) if (params[:category] && params[:category] != "all")
-    @listings.active.order(:end_time)
+    @listings = @listings.active.order(:end_time)
   end
 end
