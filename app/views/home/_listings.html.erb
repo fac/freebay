@@ -5,6 +5,7 @@
         <%= image_tag listing.image.url(:medium) %>
       </div>
       <div class="content">
+
         <div class="header"><%= listing.title %></div>
         <div class="meta">
         <% unless listing.bids.empty? %>
@@ -14,9 +15,15 @@
         <% end %>
 
         <br>
-        <strong><%= listing.condition %> | <%= listing.category %></strong>
         </div>
       </div>
+
+      <div class="extra content">
+        <div class="meta">
+        <%= listing_category_tag(listing) %> <%= listing_conditon_tag(listing) %>
+      </div>
+      </div>
+
       <div class="extra content">
         <span class="right floated">
           <%= humanized_end_time(listing) %>

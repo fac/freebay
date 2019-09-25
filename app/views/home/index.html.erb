@@ -22,12 +22,12 @@ MacBook Air and Pro laptops, with a few iOS devices thrown in for good measure.
 </p>
 
 <%= select_tag "Category",
-      options_for_select(["all"] + Listing::CATEGORIES, params[:category]),
+      options_for_select(categories_options_for_select, params[:category]),
       {id: "category_select", class: "ui selection dropdown"}
 %>
 
 <%= select_tag "Condition",
-      options_for_select(["all"] + Listing::CONDITION, params[:condition]),
+      options_for_select(conditon_options_for_select, params[:condition]),
       {id: "condition_select", class: "ui selection dropdown"}
 %>
 
