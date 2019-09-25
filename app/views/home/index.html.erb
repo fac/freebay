@@ -16,35 +16,17 @@
   Happy bidding! 🤑
 </p>
 
-<h4 class="ui header">
-  <i class="trophy icon"></i>
-  <div class="content">
-     Item Condition:
-    <div class="ui inline dropdown">
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <% Listing::CONDITION.each do |condition| %>
-          <a class="item" href="/?condition=<%= condition %>"> <%= condition %> </a>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</h4>
+<%= select_tag "Category",
+      options_for_select(["all"] + Listing::CATEGORIES, params[:category]),
+      {id: "category_select", class: "ui selection dropdown"}
+%>
 
-<h4 class="ui header">
-  <i class="trophy icon"></i>
-  <div class="content">
-     Item Category:
-    <div class="ui inline dropdown">
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        <% Listing::CATEGORIES.each do |category| %>
-          <a class="item" href="/?category=<%= category %>"> <%= category %> </a>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</h4>
+<%= select_tag "Condition",
+      options_for_select(["all"] + Listing::CONDITION, params[:condition]),
+      {id: "condition_select", class: "ui selection dropdown"}
+%>
+
+<div class="ui hidden divider"></div>
 
 <% if @listings.empty? %>
   <p>There are no auctions.</p>

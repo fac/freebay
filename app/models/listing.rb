@@ -1,9 +1,9 @@
 class Listing < ApplicationRecord
-  CONDITION = ["used", "new"]
-  CATEGORIES = %w(laptops mobiles misc)
+  CONDITION = %w(used as_new).freeze
+  CATEGORIES = %w(laptops mobiles misc).freeze
 
   has_many :bids, dependent: :destroy
-  
+
   validates :condition, inclusion: { in: Listing::CONDITION,
     message: "must be one of #{Listing::CONDITION.join(", ")}"}, allow_blank: true
 
