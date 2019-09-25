@@ -33,6 +33,7 @@ gem 'redcarpet'
 gem 'rollbar'
 gem 'sendgrid-ruby'
 gem 'scout_apm'
+gem 'webpacker'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
