@@ -17,5 +17,13 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+  def scoped_resource
+   if params[:show_archived] == "true"
+     resource_class.where(is_archived: true)
+   else
+     resource_class
+   end
+  end
   end
 end

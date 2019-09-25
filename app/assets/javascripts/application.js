@@ -25,9 +25,17 @@ $(document).ready(function() {
         .closest('.message')
         .transition('fade');
     });
+
+    $('#toggle_archived').change(function(e) {
+      const params = new URLSearchParams(location.search)
+      params.set("show_archived", e.target.checked)
+      location.search = params.toString();
+    });
 });
 
 $(document).on('turbolinks:load', function() {
   $('.ui.dropdown')
     .dropdown();
 });
+
+
