@@ -37,16 +37,26 @@ class BidsController < ApplicationController
       render 'new' and return
     end
 
-    ActiveRecord::Base.transaction do
-      @bid = autobid(@bid)
+    result = autobid(@bid)
+    if result.success?
+      Bid.transaction do
+        @bid.save!
+
+        if result.current_price
+          logger.info "Setting current_price to #{result.current_price}"
+          @bid.listing.update_attribute :current_price, result.current_price
+        end
+
+        OutbidNotifier.send_outbid_notice(result.outbid, @bid).deliver if result.outbid
+      end
     end
 
-    if @bid.errors.empty?
-      flash[:notice] = "Your bid was successful - you're the highest bidder! The current price is #{number_to_currency @listing.current_price}"
+    if result.error.blank?
+      flash[:notice] = result.message
       redirect_to listing_path(@listing)
     else
-      flash[:error] = @bid.errors.full_messages.to_sentence
-      render 'new'
+      flash[:error] = result.error
+      redirect_to new_listing_bid_path(@listing)
     end
   end
 
@@ -69,13 +79,14 @@ class BidsController < ApplicationController
 
     def autobid(bid)
       winning_bid = bid.listing.winning_bid
-
       if winning_bid.nil?
-        bid.save!
-
         logger.info "First bid. Setting listing #{bid.listing.id} current price to #{bid.listing.current_price}"
-        bid.listing.update_attribute :current_price, bid.listing.starting_price
-        return bid
+
+        return OpenStruct.new(
+          success?: true,
+          current_price: bid.listing.starting_price,
+          message: "Your bid was successful - you're the highest bidder! The current price is #{number_to_currency bid.listing.starting_price}"
+        )
       end
 
       logger.info "New bid! Current winning bid #{winning_bid.id} amount is #{winning_bid.amount}. Listing current price is #{bid.listing.current_price}"
@@ -85,35 +96,35 @@ class BidsController < ApplicationController
         # if this is a new bid by the same user, only accept it if it's higher (i.e. they're increasing their max bid)
         if bid.amount <= winning_bid.amount
           logger.info "Amount of #{bid.amount} is not higher than existing max bid of #{winning_bid.amount}"
-          bid.errors.add(:amount, "must be greater than your existing maximum bid of #{number_to_currency winning_bid.amount}")
+          return OpenStruct.new(success?: false, error: "Your bid must be greater than your existing maximum bid of #{number_to_currency winning_bid.amount}")
         else
-          bid.save!
+          return OpenStruct.new(success?: true, message: "Your maximum bid has been increased to #{number_to_currency bid.amount}. Good luck!")
         end
       else
         if bid.amount <= bid.listing.current_price
-          bid.errors.add(:amount, "must be greater than current listing price of #{bid.listing.current_price}")
-          return bid
+          return OpenStruct.new(success?: false, error: "Your bid must be greater than current listing price of #{bid.listing.current_price}")
         end
 
         if bid.amount <= winning_bid.amount
-          bid.save!
           logger.info "New bid amount of #{bid.amount} is <= to winning bid amount #{winning_bid.amount}"
 
-          logger.info "Setting current_price to #{bid.listing.current_price}"
-          bid.listing.update_attribute :current_price, [winning_bid.amount, BidIncrement.increment(bid.amount)].min
-
-          bid.errors.add(:base, "Bad luck, someone has bid a higher price. Your maximum bid must be greater than #{number_to_currency bid.listing.current_price}")
+          current_price = [winning_bid.amount, BidIncrement.increment(bid.amount)].min
+          return OpenStruct.new(
+              success?: true,
+              current_price: current_price,
+              error: "Bad luck, someone has bid a higher price. Your maximum bid must be greater than #{number_to_currency current_price}"
+          )
         else
           logger.info "New bid amount of #{bid.amount} is higher than current winning bid amount #{number_to_currency winning_bid.amount}"
-          bid.save!
 
-          logger.info "Setting current_price to #{bid.listing.current_price}"
-          bid.listing.update_attribute :current_price, [bid.amount, BidIncrement.increment(winning_bid.amount)].min
-
-          OutbidNotifier.send_outbid_notice(winning_bid, bid).deliver
+          current_price = [bid.amount, BidIncrement.increment(winning_bid.amount)].min
+          return OpenStruct.new(
+            success?: true,
+            current_price: current_price,
+            message: "Your bid was successful - you're the highest bidder! The current price is #{number_to_currency current_price}",
+            outbid: winning_bid
+          )
         end
       end
-
-      bid
     end
 end
