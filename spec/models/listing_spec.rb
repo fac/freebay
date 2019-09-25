@@ -80,8 +80,8 @@ RSpec.describe Listing, type: :model do
         expect(listing.valid?).to eq(true)
       end
 
-      it "is valid when 'new'" do
-        listing = FactoryBot.build(:listing, condition:"used")
+      it "is valid when 'as_new'" do
+        listing = FactoryBot.build(:listing, condition:"as_new")
         expect(listing.valid?).to eq(true)
       end
 
