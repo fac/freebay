@@ -48,13 +48,13 @@ RSpec.describe Listing, type: :model do
         expect(listing.valid?).to eq(true)
       end
 
-      it "is valid when 'laptop" do
-        listing = FactoryBot.build(:listing, category:"laptops")
+      it "is valid when 'macbook_pro" do
+        listing = FactoryBot.build(:listing, category:"macbook_pro")
         expect(listing.valid?).to eq(true)
       end
 
-      it "is valid when 'mobiles" do
-        listing = FactoryBot.build(:listing, category:"mobiles")
+      it "is valid when 'iphone" do
+        listing = FactoryBot.build(:listing, category:"iphone")
         expect(listing.valid?).to eq(true)
       end
 
@@ -75,13 +75,13 @@ RSpec.describe Listing, type: :model do
         expect(listing.valid?).to eq(true)
       end
 
-      it "is valid when 'used'" do
-        listing = FactoryBot.build(:listing, condition:"used")
+      it "is valid when 'good'" do
+        listing = FactoryBot.build(:listing, condition:"good")
         expect(listing.valid?).to eq(true)
       end
 
-      it "is valid when 'as_new'" do
-        listing = FactoryBot.build(:listing, condition:"as_new")
+      it "is valid when 'poor'" do
+        listing = FactoryBot.build(:listing, condition:"poor")
         expect(listing.valid?).to eq(true)
       end
 
