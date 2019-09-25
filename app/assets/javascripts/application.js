@@ -43,4 +43,3 @@ $(document).on('turbolinks:load', function() {
     location.search = params.toString();
   });
 });
-
