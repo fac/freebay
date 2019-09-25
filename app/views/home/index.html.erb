@@ -3,15 +3,20 @@
 </h1>
 
 <p>
-  We have <%= pluralize @listings.size, "item" %> in our sale! We have a large selection of
-  iMacs (both 27" and 21" flavour), Apple laptops (MacBook Air and MacBook Pro) and
-  monitors, with a few iOS devices thrown in for good measure.
+ We have <%= pluralize @listings.size, "item" %> in our sale! We have a large selection of
+MacBook Air and Pro laptops, with a few iOS devices thrown in for good measure.
 </p>
+
 <p>
   You can browse all the items below and click the cards to view further details. You can bid
-  as many times as you like on an item. Highest bidder wins at the end of the auction. We will
-  probably close the auction before the end time to prevent an unfair, last-minute surge.
+  as many times as you like on an item. Highest bidder wins at the end of the auction, at which
+  point IT and Finance will approach you in order to take payment.
 </p>
+
+<p>
+  All devices come with a charger, unless stated otherwise.
+</p>
+
 <p>
   Happy bidding! 🤑
 </p>
@@ -29,7 +34,7 @@
 <div class="ui hidden divider"></div>
 
 <% if @listings.empty? %>
-  <p>There are no auctions.</p>
+  <p>There are no auctions. Come back soon!</p>
 <% else %>
   <%= render 'listings' %>
 <% end %>
