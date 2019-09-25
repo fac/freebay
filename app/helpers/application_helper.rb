@@ -29,10 +29,10 @@ module ApplicationHelper
   end
 
   def listing_conditon_tag(listing)
-    link_to(listing.condition, "#", {class: "ui green label" })
+    content_tag(:div, humanized_condition(listing.condition), class: "ui orange label")
   end
 
   def listing_category_tag(listing)
-    link_to(listing.category, "#", {class: "ui orange label" })
+    content_tag(:div, humanized_category(listing.category), class: "ui green label")
   end
 end
