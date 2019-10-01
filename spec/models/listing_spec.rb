@@ -80,6 +80,11 @@ RSpec.describe Listing, type: :model do
         expect(listing.valid?).to eq(true)
       end
 
+      it "is valid when 'average'" do
+        listing = FactoryBot.build(:listing, condition:"average")
+        expect(listing.valid?).to eq(true)
+      end
+
       it "is valid when 'poor'" do
         listing = FactoryBot.build(:listing, condition:"poor")
         expect(listing.valid?).to eq(true)
