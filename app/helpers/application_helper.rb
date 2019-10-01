@@ -36,8 +36,9 @@ module ApplicationHelper
     {
       "good" => "green",
       "poor" => "orange",
+      "average" => "yellow",
       "requires_repair" => "red"
-    }[condition]
+    }.fetch(condition, "")
   end
 
   def listing_category_tag(listing)

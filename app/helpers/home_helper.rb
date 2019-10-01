@@ -1,9 +1,11 @@
 module HomeHelper
   def humanized_category(category)
+    return "" if category.nil?
     category.humanize.titleize.gsub("Iphone", "iPhone").gsub("Ipad", "iPad")
   end
 
   def humanized_condition(condition)
+    return "" if condition.nil?
     condition.humanize.titleize
   end
 
