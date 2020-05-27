@@ -318,7 +318,7 @@ DEPENDENCIES
   paperclip (~> 5.2.1)
   postgresql
   puma (~> 3.11)
-  rails (~> 5.2.4.2)
+  rails (~> 5.2.4.3)
   rails-controller-testing
   redcarpet
   rollbar
