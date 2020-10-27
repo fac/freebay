@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-      resources :listings
-      resources :users
-
-      root to: "listings#index"
-    end
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
 

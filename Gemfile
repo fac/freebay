@@ -25,14 +25,13 @@ gem 'postgresql'
 gem 'clearance'
 gem 'semantic-ui-sass'
 gem 'jquery-rails'
-gem 'administrate'
-gem 'administrate-field-paperclip', git: 'https://github.com/fac/administrate-field-paperclip.git'
 gem "kt-paperclip"
 gem 'aws-sdk-s3', require: false
 gem 'redcarpet'
 gem 'rollbar'
 gem 'sendgrid-ruby'
 gem 'scout_apm'
+gem 'trestle'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
