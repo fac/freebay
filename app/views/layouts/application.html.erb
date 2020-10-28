@@ -22,6 +22,11 @@
               <div class="item">
                 <%= link_to "My Bids", user_bids_path(current_user) %>
               </div>
+              <% if current_user.admin? %>
+              <div class="item">
+                <%= link_to "Admin", '/admin/listings' %>
+              </div>
+              <% end %>
               <div class="item">
                 <%= link_to "Sign Out 👋🏽", sign_out_path, method: :delete %>
               </div>
