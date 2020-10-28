@@ -34,8 +34,8 @@ Trestle.resource(:listings) do
     file_field :image
 
     check_box :is_archived
-    text_field :condition
-    text_field :category
+    select :condition, Listing::CONDITION
+    select :category, Listing::CATEGORIES
   end
 
   # By default, all parameters passed to the update and create actions will be
