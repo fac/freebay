@@ -3,13 +3,13 @@ Trestle.configure do |config|
   #
   # Set the page title shown in the main header within the admin.
   #
-  config.site_title = "Freebay"
+  config.site_title = "FreeBay"
 
   # Specify a custom image to be used in place of the site title for mobile and
   # expanded/desktop navigation. These images should be placed within your
   # asset paths, e.g. app/assets/images.
   #
-  # config.site_logo = "logo.png"
+  config.site_logo = "freeBay-logo.png"
 
   # Specify a custom image to be used for the collapsed/tablet navigation.
   #
@@ -73,9 +73,10 @@ Trestle.configure do |config|
 
   # Register callbacks to run before, after or around all Trestle actions.
   #
-  # config.before_action do |controller|
-  #   Rails.logger.debug("Before action")
-  # end
+  config.before_action do |controller|
+    current_user = request.env[:clearance].current_user
+    redirect_to '/' unless current_user.admin?
+  end
   #
   # config.after_action do |controller|
   #   Rails.logger.debug("After action")
