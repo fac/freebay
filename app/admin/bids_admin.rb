@@ -1,6 +1,6 @@
 Trestle.resource(:bids) do
   menu do
-    item :bids, icon: "fa fa-star"
+    item :bids, icon: "fa fa-line-chart"
   end
 
   # Customize the table columns shown on the index view.

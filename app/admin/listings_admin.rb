@@ -1,6 +1,6 @@
 Trestle.resource(:listings) do
   menu do
-    item :listings, icon: "fa fa-star"
+    item :listings, icon: "fa fa-list-alt"
   end
 
   # Customize the table columns shown on the index view.
