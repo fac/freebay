@@ -3,6 +3,11 @@ Trestle.resource(:listings) do
     item :listings, icon: "fa fa-list-alt"
   end
 
+  scopes do
+    scope :active, -> { Listing.active }, default: true
+    scope :all
+  end
+
   # Customize the table columns shown on the index view.
   #
   table do
