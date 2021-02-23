@@ -36,7 +36,9 @@
 
 <div class="ui grid listing">
   <div class="eight wide column">
+    <% if @listing.image.present? %>
     <%= image_tag @listing.image.url(:medium) %>
+    <% end %>
   </div>
 
   <div class="eight wide column">

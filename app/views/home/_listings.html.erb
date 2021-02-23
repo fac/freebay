@@ -2,7 +2,9 @@
   <% @listings.each do |listing| %>
     <%= link_to listing_path(listing), class: "ui card" do %>
       <div class="image">
-        <%= image_tag listing.image.url(:medium) %>
+        <% if listing.image.present? %>
+          <%= image_tag listing.image.url(:medium) %>
+        <% end %>
       </div>
       <div class="content">
 
