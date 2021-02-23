@@ -1,4 +1,4 @@
-![FreeBay Logo](https://github.com/fac/freebay/blob/master/app/assets/images/freeBay-logo.png)
+![FreeBay Logo](https://github.com/fac/freebay/blob/main/app/assets/images/freeBay-logo.png)
 
 Not eBay.
 
