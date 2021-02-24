@@ -8,7 +8,7 @@ class UsersController < Clearance::UsersController
       redirect_back_or url_after_create
     else
       flash.now.alert = "Please complete all the fields"
-      render template: "users/new"
+      render template: "users/new", status: :unprocessable_entity
     end
   end
 
