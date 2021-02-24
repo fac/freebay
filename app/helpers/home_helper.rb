@@ -4,7 +4,7 @@ module HomeHelper
   end
 
   def humanized_condition(condition)
-    condition.humanize.titleize.gsub("All", "All Categories") unless condition.nil?
+    condition.humanize.titleize.gsub("All", "All Conditions") unless condition.nil?
   end
 
   def categories
