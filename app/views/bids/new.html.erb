@@ -1,33 +1,43 @@
-<h2 class="ui header">New Bid</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h2>New Bid</h2>
 
-<p>
-  You're about to bid on <strong><%= @listing.title %></strong>.
-  Time left: <%= distance_of_time_in_words Time.now, @listing.end_time %>
-  <em>(<%= (@listing.end_time.to_s :short) %>)</em>
-</p>
-  <% if @listing.bids.present? %>
-    <p>
-    The current winning bid is <strong><%= number_to_currency @listing.current_price %></strong>.
-    </p>
-
-    <% if current_user == @listing.winning_bid.user %>
-      <p>You're the winning bidder and your maximum bid is <%= number_to_currency @listing.winning_bid.amount %>
+      <p>
+        You're about to bid on <strong><%= @listing.title %></strong>.
+        Time left: <%= distance_of_time_in_words Time.now, @listing.end_time %>
+        <em>(<%= (@listing.end_time.to_s :short) %>)</em>
       </p>
-    <% end %>
-  <% else %>
-    <p>
-    You're the first bidder – don't hold back! Starting price for this item is
-    <strong><%= number_to_currency @listing.starting_price %></strong>.
-    </p>
-  <% end %>
+        <% if @listing.bids.present? %>
+          <p>
+          The current winning bid is <strong><%= number_to_currency @listing.current_price %></strong>.
+          </p>
+
+          <% if current_user == @listing.winning_bid.user %>
+            <p>You're the winning bidder and your maximum bid is <%= number_to_currency @listing.winning_bid.amount %>
+            </p>
+          <% end %>
+        <% else %>
+          <p>
+          You're the first bidder – don't hold back! Starting price for this item is
+          <strong><%= number_to_currency @listing.starting_price %></strong>.
+          </p>
+        <% end %>
 
 
-<%= form_for [@listing, @bid], html: { class: "ui form" } do |form| %>
-  <div class="inline field">
-    <%= form.label :amount, "Your Maximum Bid" %>
-    <%= form.text_field :amount %>
+      <%= form_for [@listing, @bid], html: { class: "form-inline my-4", style: "max-width: 400px" } do |form| %>
+        <strong><%= form.label :amount, "Your Maximum Bid", class: "form-label" %></strong>
+        <%= form.text_field :amount, class: "form-control" %>
+
+        <div class="mt-3">
+        <%= form.submit "Place bid", class: "btn btn-primary"  %>
+        <%= link_to "Cancel", listing_path(@listing), class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-5">
+      <%= render '/home/card', listing: @listing, width: "100%" %>
+    </div>
   </div>
-
-  <%= form.submit "Place bid", class: "ui primary button"  %>
-  <%= link_to "Cancel", listing_path(@listing), class: "ui button" %>
-<% end %>
+</div>

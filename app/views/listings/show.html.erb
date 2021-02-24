@@ -1,59 +1,44 @@
-<h1 class="ui header"><%= @listing.title %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-7">
+      <h1><%= @listing.title %></h1>
 
-<% if @listing.active? %>
-  <% if @listing.bids.present? %>
-    <p>
-    <%= pluralize @listing.bids.count, "bid" %> on this item.
-    The current price is
-    <strong><%= number_to_currency @listing.current_price %></strong>.
-    </p>
-    <% if current_user == @listing.winning_bid.user %>
-      <p>You're the winning bidder! 🎉</p>
+      <% if @listing.active? %>
+        <% if @listing.bids.present? %>
+          <p>
+          <%= pluralize @listing.bids.count, "bid" %> on this item.
+          The current price is
+          <strong><%= number_to_currency @listing.current_price %></strong>.
+          </p>
+          <% if current_user == @listing.winning_bid.user %>
+            <p>You're the winning bidder! 🎉</p>
 
-      <p>
-      Your maximum bid is currently <%= number_to_currency @listing.winning_bid.amount %>.
-      FreeBay will automatically bid for you up to this amount.
-      </p>
-    <% end %>
-    </p>
-  <% else %>
-    <p>
-    No bids yet. Feeling lucky? The starting price is
-    <strong><%= number_to_currency @listing.starting_price %></strong>.
-    </p>
-  <% end %>
+            <p>
+            Your maximum bid is currently <%= number_to_currency @listing.winning_bid.amount %>.
+            FreeBay will automatically bid for you up to this amount.
+            </p>
+          <% end %>
+          </p>
+        <% else %>
+          <p>
+          No bids yet. Feeling lucky? The starting price is
+          <strong><%= number_to_currency @listing.starting_price %></strong>.
+          </p>
+        <% end %>
 
-  <p>
-    <%= link_to "Bid now", new_listing_bid_path(@listing), class: "ui primary button" %>
-  </p>
+        <div class="mb-4">
+          <%= link_to "Bid now", new_listing_bid_path(@listing), class: "btn btn-primary" %>
+        </div>
+      <% else %>
+        <p>
+          Awww, this listing hasn't started, so you can't make a bid yet 🐼
+        </p>
+      <% end %>
+    </div>
 
-<% else %>
-  <p>
-    Awww, this listing hasn't started, so you can't make a bid yet 🐼
-  </p>
-<% end %>
-
-
-<div class="ui grid listing">
-  <div class="eight wide column">
-    <% if @listing.image.present? %>
-    <%= image_tag @listing.image.url(:medium) %>
-    <% end %>
-  </div>
-
-  <div class="eight wide column">
-    <h3 class="ui header">Description <%= listing_conditon_tag(@listing) %> <%= listing_category_tag(@listing) %>
-      <div class="sub header">
-        <%= humanized_end_time(@listing) %>
-      </div>
-    </h3>
-
-    <p>
-      <%= markdown @listing.description %>
-    </p>
-  </div>
-
-  <div class="sixteen wide column">
+    <div class="col-md-5">
+      <%= render '/home/card', listing: @listing, width: "100%" %>
+    </div>
 
   </div>
 </div>

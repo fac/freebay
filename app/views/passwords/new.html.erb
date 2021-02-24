@@ -4,13 +4,9 @@
   <p><%= t(".description") %></p>
 
   <%= form_for :password, url: passwords_path do |form| %>
-    <div class="text-field">
-      <%= form.label :email %>
-      <%= form.text_field :email, type: 'email' %>
-    </div>
+    <strong><%= form.label :email, "Email", class: "form-label" %></strong>
+    <%= form.text_field :email, type: 'email', class: "form-control", style: "max-width: 18rem;" %>
 
-    <div class="submit-field">
-      <%= form.submit %>
-    </div>
+    <%= form.submit "Reset Password", class: "btn btn-primary mt-3" %>
   <% end %>
 </div>

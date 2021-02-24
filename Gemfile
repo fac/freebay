@@ -20,8 +20,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 
 gem 'clearance'
-gem 'semantic-ui-sass'
-gem 'jquery-rails'
 gem 'pg'
 gem "kt-paperclip"
 gem 'aws-sdk-s3', require: false
@@ -69,3 +67,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "webpacker", "~> 5.2"

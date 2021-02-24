@@ -1,12 +1,18 @@
 module HomeHelper
   def humanized_category(category)
-    return "" if category.nil?
-    category.humanize.titleize.gsub("Iphone", "iPhone").gsub("Ipad", "iPad")
+    category.humanize.titleize.gsub("Iphone", "iPhone").gsub("Ipad", "iPad").gsub("All", "All Categories") unless category.nil?
   end
 
   def humanized_condition(condition)
-    return "" if condition.nil?
-    condition.humanize.titleize
+    condition.humanize.titleize.gsub("All", "All Categories") unless condition.nil?
+  end
+
+  def categories
+    ["all"] + Listing::CATEGORIES
+  end
+
+  def conditions
+    ["all"] + Listing::CONDITIONS.keys
   end
 
   def categories_options_for_select

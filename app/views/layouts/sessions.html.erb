@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%= javascript_include_tag 'application' %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application' %>
+  <%= stylesheet_link_tag 'application', 'session', media: 'all', 'data-turbolinks-track': 'reload' %>
 
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div class="ui container">
-    <div class="ui middle aligned center aligned grid">
-      <div class="column left aligned">
 
-        <% unless flash.empty? %>
-          <div id="flash" class="ui negative message">
-            <i class="close icon"></i>
+  <main class="form-signin">
+    <% unless flash.empty? %>
+      <% flash.each do |key, value| %>
+        <div class="<%= flash_class(key) %> alert-dismissible">
+          <%= h value %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+    <% end %>
 
-            <% flash.each do |key, value| -%>
-              <div id="flash_<%= key %>"><%=h value %></div>
-            <% end %>
-          </div>
-        <% end %>
-
-        <%= yield %>
-      </div>
-    </div>
-  </div>
+    <%= yield %>
+  </main>
 </body>
 </html>
