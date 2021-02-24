@@ -1,0 +1,51 @@
+@import "bootstrap/scss/bootstrap";
+
+body {
+  background-color: #f2f7fb;
+}
+
+footer {
+  background-color: #003153;
+  color: white;
+}
+
+.callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+  h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  code {
+    border-radius: 3px;
+  }
+  & + .bs-callout {
+    margin-top: -5px;
+  }
+}
+@each $name,$color in (default,#777),(primary,#428bca),(success,#5cb85c),(danger,#d9534f),(warning,#f0ad4e),(info,#5bc0de), (bdc,#29527a) {
+  .callout-#{$name} {
+    border-left-color: $color;
+    h4 {
+      color: $color;
+    }
+  }
+}
+
+.card-title a {
+  text-decoration: none;
+  color: black;
+}
+
+main {
+    background-image: url(image_path('winston.svg'));
+    background-size: 110px;
+    background-position: bottom -75px right 20px;
+    background-repeat: no-repeat;
+}

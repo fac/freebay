@@ -34,7 +34,7 @@ class BidsController < ApplicationController
     @bid = Bid.new(bid_params.merge(listing: @listing, user: current_user))
     unless @bid.valid?
       flash[:error] = @bid.errors.full_messages.to_sentence
-      render 'new' and return
+      render 'new', status: :unprocessable_entity and return
     end
 
     result = autobid(@bid)

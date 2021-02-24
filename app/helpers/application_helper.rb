@@ -1,9 +1,10 @@
 module ApplicationHelper
   def flash_class(level)
     case level.to_sym
-    when :success then "ui green message"
-    when :error then "ui red message"
-    when :notice then "ui blue message"
+    when :success then "alert alert-success"
+    when :error then "alert alert-danger"
+    when :notice then "alert alert-primary"
+    when :alert then "alert alert-danger"
     end
   end
 
@@ -28,20 +29,20 @@ module ApplicationHelper
     markdown.render(text).html_safe
   end
 
-  def listing_conditon_tag(listing)
-    content_tag(:div, humanized_condition(listing.condition), class: "ui label " << condition_colour(listing.condition))
+  def listing_condition_tag(listing, options = {})
+    content_tag :div, humanized_condition(listing.condition), class: "badge #{condition_colour(listing.condition)} #{options[:class]}"
   end
 
   def condition_colour(condition)
     {
-      "good" => "green",
-      "poor" => "orange",
-      "average" => "yellow",
-      "requires_repair" => "red"
+      "good" => "bg-success",
+      "poor" => "bg-warning",
+      "average" => "bg-info",
+      "requires_repair" => "be-danger"
     }.fetch(condition, "")
   end
 
-  def listing_category_tag(listing)
-    content_tag(:div, humanized_category(listing.category), class: "ui grey label")
+  def listing_category_tag(listing, options = {})
+    content_tag :div, humanized_category(listing.category), class: "badge bg-secondary #{options[:class]}"
   end
 end

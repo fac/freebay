@@ -22,5 +22,3 @@ module Freebay
     end
   end
 end
-
-require 'semantic-ui-sass'
