@@ -7,6 +7,6 @@ import "@hotwired/turbo-rails"
 
 const application = Application.start()
 //const context = require.context("../controllers", true, /\.js$/);
+//application.load(definitionsFromContext(context));
 
-application.load(definitionsFromContext(context));
 Rails.start();
