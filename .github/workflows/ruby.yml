@@ -18,37 +18,48 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        ruby-version: [2.7.x]
-
     services:
-      db:
+      postgres:
         image: postgres:12
-        ports: ['5432:5432']
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-          
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Run tests
-      env:
-        PGHOST: 127.0.0.1
-        PGUSER: postgres
-        RAILS_ENV: test
+        ruby-version: 2.7.1
+        bundler-cache: true
+
+    - name: Set up node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12'
+
+    - name: Install PostgreSQL 12 client
+      run: sudo apt-get install libpq-dev
+
+    - name: Install frontend dependencies
+      run: yarn install
+
+    - name: Setup Database
       run: |
-        sudo apt-get -yqq install libpq-dev
-        gem install bundler
-        bundle install --jobs 4 --retry 3
         bundle exec rails db:create
-        bundle exec rails db:migrate
-        bundle exec rspec
+        bundle exec rails db:schema:load
+      env:
+        RAILS_ENV: test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres        
         
+    - name: Run RSpec
+      run: COVERAGE=true bundle exec rspec  --require rails_helper
+      env:
+        RAILS_ENV: test
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
