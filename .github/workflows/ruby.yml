@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby-version: 2.7.x
+        ruby-version: [2.7.x]
 
     services:
       db:
