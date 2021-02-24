@@ -7,11 +7,13 @@
 <% else %>
   <table class="table bg-white table-bordered mt-3">
     <thead>
-      <tr><th>Item</th>
-      <th>Bid time</th>
-      <th>Bid Amount</th>
-      <th>Winning?</th>
-    </tr></thead>
+      <tr class="bg-light">
+        <th>Item</th>
+        <th>Bid time</th>
+        <th>Bid Amount</th>
+        <th>Winning?</th>
+      </tr>
+    </thead>
     <tbody>
       <% @bids.each do |bid| %>
       <tr>

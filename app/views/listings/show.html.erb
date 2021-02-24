@@ -44,14 +44,16 @@
 </div>
 
 <% if @listing.ended? && current_user.admin? && @listing.bids.count > 0 %>
-<h2 class="ui header"> Bid History</h2>
-<table class="ui celled table">
+<h3 class="mt-2">Bid History</h3>
+<table class="table table-bordered bg-white">
   <thead>
-    <tr><th>Time</th>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Bid</th>
-  </tr></thead>
+    <tr class="bg-light">
+      <th>Time</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Bid</th>
+    </tr>
+  </thead>
   <tbody>
     <% @listing.bids.order("amount DESC").each do |bid| %>
     <tr>
