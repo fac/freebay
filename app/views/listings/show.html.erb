@@ -27,6 +27,12 @@
         <% end %>
 
         <div class="mb-4">
+          <p>
+            <%= markdown @listing.description %>
+          </p>
+        </div>
+
+        <div class="mb-4">
           <%= link_to "Bid now", new_listing_bid_path(@listing), class: "btn btn-primary" %>
         </div>
       <% else %>
