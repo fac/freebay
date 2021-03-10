@@ -19,7 +19,7 @@ gem "kt-paperclip"
 gem 'pg'
 gem 'redcarpet'
 gem 'rollbar'
-gem 'sendgrid-ruby'
+gem 'sendgrid-actionmailer'
 gem 'trestle'
 gem "webpacker"
 
