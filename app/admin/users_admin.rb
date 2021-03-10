@@ -3,6 +3,11 @@ Trestle.resource(:users) do
     item :users, icon: "fa fa-user-circle-o"
   end
 
+  collection do
+    # Set the default order when manual sorting is not applied
+    User.order(first_name: :asc)
+  end
+
   # Customize the table columns shown on the index view.
   #
   table do

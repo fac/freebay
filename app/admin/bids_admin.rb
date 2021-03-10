@@ -3,6 +3,11 @@ Trestle.resource(:bids) do
     item :bids, icon: "fa fa-line-chart"
   end
 
+  collection do
+    # Set the default order when manual sorting is not applied
+    Bid.order(created_at: :desc)
+  end
+
   # Customize the table columns shown on the index view.
   #
   # table do
