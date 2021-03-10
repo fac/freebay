@@ -46,9 +46,8 @@ class BidsController < ApplicationController
           logger.info "Setting current_price to #{result.current_price}"
           @bid.listing.update_attribute :current_price, result.current_price
         end
-
-        OutbidNotifier.send_outbid_notice(result.outbid, @bid).deliver if result.outbid
       end
+      OutbidNotifier.send_outbid_notice(result.outbid, @bid).deliver if result.outbid
     end
 
     if result.error.blank?
