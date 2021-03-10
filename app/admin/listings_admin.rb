@@ -3,6 +3,11 @@ Trestle.resource(:listings) do
     item :listings, icon: "fa fa-list-alt"
   end
 
+  collection do
+    # Set the default order when manual sorting is not applied
+    Listing.order(start_time: :desc)
+  end
+
   scopes do
     scope :active, -> { Listing.active }, default: true
     scope :all
