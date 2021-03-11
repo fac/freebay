@@ -10,7 +10,7 @@ class OutbidNotifier < ApplicationMailer
       @listing = previous_winning_bid.listing
 
       mail to: @user.email,
-           from: "noreply@freebayapp.com",
+           from: "FreeBay Bot <noreply@freebay.bargains>",
            subject: 'FreeBay - You have been outbid!'
     end
   end
