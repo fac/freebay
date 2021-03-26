@@ -15,13 +15,13 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clearance'
 gem 'jbuilder', '~> 2.7'
-gem "kt-paperclip"
+gem 'kt-paperclip'
 gem 'pg'
 gem 'redcarpet'
 gem 'rollbar'
 gem 'sendgrid-actionmailer'
 gem 'trestle'
-gem "webpacker"
+gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
