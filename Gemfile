@@ -21,7 +21,7 @@ gem 'redcarpet'
 gem 'rollbar'
 gem 'sendgrid-actionmailer'
 gem 'trestle'
-gem "webpacker"
+gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
