@@ -15,7 +15,7 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clearance'
 gem 'jbuilder', '~> 2.7'
-gem "kt-paperclip"
+gem 'kt-paperclip'
 gem 'pg'
 gem 'redcarpet'
 gem 'rollbar'
