@@ -5,7 +5,7 @@ ruby '2.7.1'
 
 # Rails
 gem 'rails', '~> 6.1.3.2'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 gem 'sass-rails', '>= 6'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 5.0.0'
